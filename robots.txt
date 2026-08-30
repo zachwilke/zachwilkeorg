@@ -1,3 +1,6 @@
+# Humans and agents are both welcome here.
+# A plain-text version of this site lives at /llms.txt
+
 User-agent: *
 Allow: /
 

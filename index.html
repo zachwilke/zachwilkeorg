@@ -1,11 +1,21 @@
 <!doctype html>
 <html lang="en">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext x='50%25' y='50%25' font-size='48' text-anchor='middle' dominant-baseline='central'%3E🚀%3C/text%3E%3C/svg%3E">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Zach Wilke</title>
-<meta name="description" content="Zach Wilke — IT operations, software, and the agentic AI world.">
+<meta name="description" content="Zach Wilke — Director of Operations at a Texas MSP. Twelve years in IT operations, six writing software, currently deep in the agentic AI world.">
+<link rel="canonical" href="https://zachwilke.org/">
+<link rel="alternate" type="text/markdown" href="/llms.txt" title="Plain-text version for LLMs and agents">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232c7a4b'/%3E%3Ctext x='50%25' y='52%25' font-size='34' font-family='Georgia,serif' fill='%23fdfcf9' text-anchor='middle' dominant-baseline='central'%3EZ%3C/text%3E%3C/svg%3E">
+
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Zach Wilke">
+<meta property="og:description" content="Director of Operations at a Texas MSP. Twelve years in IT operations, six writing software, currently deep in the agentic AI world.">
+<meta property="og:url" content="https://zachwilke.org/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@zachwilke_1">
+
 <style>
   :root {
     --bg: #fdfcf9;
@@ -14,6 +24,8 @@
     --accent: #2c7a4b;
     --accent-hover: #1e5e37;
     --rule: #e3e0d8;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --serif: ui-serif, Georgia, "Iowan Old Style", "Times New Roman", serif;
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -25,80 +37,161 @@
       --rule: #2a312d;
     }
   }
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
   body {
     background: var(--bg);
     color: var(--text);
-    font: 18px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      Helvetica, Arial, sans-serif;
-    max-width: 40rem;
+    font: 1.0625rem/1.65 var(--sans);
+    max-width: 38rem;
     margin: 0 auto;
-    padding: 5rem 1.25rem 6rem;
+    padding: clamp(3rem, 12vh, 6rem) 1.5rem 6rem;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
+
   h1 {
-    font-size: 1.5rem;
-    font-weight: 650;
-    margin-bottom: 0.25rem;
+    font-family: var(--serif);
+    font-size: clamp(2rem, 7vw, 2.5rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
   }
   h1::after {
     content: "";
     display: block;
-    width: 2.5rem;
-    height: 4px;
-    margin-top: 0.9rem;
+    width: 2.25rem;
+    height: 3px;
+    margin-top: 1.1rem;
     background: var(--accent);
     border-radius: 2px;
   }
+
   h2 {
-    font-size: 1.05rem;
-    font-weight: 650;
-    margin: 2.75rem 0 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin: 3rem 0 0.85rem;
+    padding-bottom: 0.55rem;
+    border-bottom: 1px solid var(--rule);
   }
-  p { margin: 0.75rem 0; }
-  .muted { color: var(--muted); }
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { color: var(--accent-hover); text-decoration: underline; }
+
+  p { margin: 0.9rem 0; text-wrap: pretty; }
+  .lede { margin-top: 1.4rem; color: var(--muted); }
+
   ul { list-style: none; }
-  li { margin: 0.5rem 0; padding-left: 1.1rem; position: relative; }
+  li {
+    margin: 0.45rem 0;
+    padding-left: 1.15rem;
+    position: relative;
+    text-wrap: pretty;
+  }
   li::before {
-    content: "–";
+    content: "";
     position: absolute;
-    left: 0;
-    color: var(--accent);
+    left: 0.05rem;
+    top: 0.72em;
+    width: 0.4rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: color 0.15s ease, text-decoration-color 0.15s ease;
+  }
+  a:hover {
+    color: var(--accent-hover);
+    text-decoration-color: currentColor;
+  }
+  a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection { background: color-mix(in srgb, var(--accent) 25%, transparent); }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
   }
 </style>
 </head>
 <body>
 
-<h1>Zach Wilke</h1>
-<p class="muted">Director of Operations at an MSP in Texas. Husband to Hannah, father to four kids who are my world.</p>
+<header>
+  <h1>Zach Wilke</h1>
+  <p class="lede">Director of Operations at an MSP in Texas. Husband to Hannah, father to four kids who are my world.</p>
+</header>
 
-<h2>Now</h2>
-<p>Twelve years in IT operations, six of them writing software too. These days I'm deep in the agentic AI world — always dabbling, always building something. Linux enthusiast through and through.</p>
+<main>
+  <section aria-labelledby="now">
+    <h2 id="now">Now</h2>
+    <p>Twelve years in IT operations, six of them writing software too. These days I'm deep in the agentic AI world — always dabbling, always building something. Linux enthusiast through and through.</p>
+  </section>
 
-<h2>Some things I believe</h2>
-<ul>
-  <li>Christ is Lord.</li>
-  <li>Simple things are easier to keep alive.</li>
-  <li>Operations teaches you what actually breaks; development teaches you why.</li>
-  <li>The agentic era is the most exciting shift I've seen in twelve years of doing this.</li>
-  <li>Family first. Everything else is details.</li>
-</ul>
+  <section aria-labelledby="beliefs">
+    <h2 id="beliefs">Some things I believe</h2>
+    <ul>
+      <li>Christ is Lord.</li>
+      <li>Simple things are easier to keep alive.</li>
+      <li>Operations teaches you what actually breaks; development teaches you why.</li>
+      <li>The agentic era is the most exciting shift I've seen in twelve years of doing this.</li>
+      <li>Family first. Everything else is details.</li>
+    </ul>
+  </section>
 
-<h2>Some things I've built</h2>
-<ul>
-  <li><a href="https://binder.school">Binder</a></li>
-  <li><a href="https://omarchyplugins.com/plugin.html?id=io.github.zachwilke.mx">Omarchy MX Control</a></li>
-  <li><a href="https://github.com/zachwilke/mylight">mylight</a></li>
-</ul>
+  <section aria-labelledby="built">
+    <h2 id="built">Some things I've built</h2>
+    <ul>
+      <li><a href="https://binder.school">Binder</a></li>
+      <li><a href="https://omarchyplugins.com/plugin.html?id=io.github.zachwilke.mx">Omarchy MX Control</a></li>
+      <li><a href="https://github.com/zachwilke/mylight">mylight</a></li>
+    </ul>
+  </section>
 
-<h2>Elsewhere</h2>
-<ul>
-  <li><a href="https://github.com/zachwilke">GitHub</a></li>
-  <li><a href="https://x.com/zachwilke_1">X</a></li>
-  <li><a href="https://world.hey.com/zwilke">Hey World</a></li>
-  <li><a href="mailto:zach@pinefall.dev">zach@pinefall.dev</a></li>
-</ul>
+  <section aria-labelledby="elsewhere">
+    <h2 id="elsewhere">Elsewhere</h2>
+    <ul>
+      <li><a rel="me" href="https://github.com/zachwilke">GitHub</a></li>
+      <li><a rel="me" href="https://x.com/zachwilke_1">X</a></li>
+      <li><a rel="me" href="https://world.hey.com/zwilke">Hey World</a></li>
+      <li><a rel="me" href="mailto:zach@pinefall.dev">zach@pinefall.dev</a></li>
+    </ul>
+  </section>
+</main>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Zach Wilke",
+  "url": "https://zachwilke.org/",
+  "email": "zach@pinefall.dev",
+  "jobTitle": "Director of Operations",
+  "description": "Director of Operations at an MSP in Texas. Twelve years in IT operations, six writing software, currently deep in the agentic AI world.",
+  "knowsAbout": ["IT operations", "Software development", "Agentic AI", "Linux"],
+  "address": {
+    "@type": "PostalAddress",
+    "addressRegion": "TX",
+    "addressCountry": "US"
+  },
+  "sameAs": [
+    "https://github.com/zachwilke",
+    "https://x.com/zachwilke_1",
+    "https://world.hey.com/zwilke"
+  ]
+}
+</script>
 
 </body>
 </html>

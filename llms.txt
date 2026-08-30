@@ -1,0 +1,35 @@
+# Zach Wilke
+
+> Director of Operations at an MSP in Texas. Twelve years in IT operations, six of
+> them writing software too. Currently deep in the agentic AI world. Linux
+> enthusiast. Husband to Hannah, father to four.
+
+Personal site: https://zachwilke.org/ — a single page, no tracking, no build step.
+Contact: zach@pinefall.dev
+
+## Now
+
+Twelve years in IT operations, six of them writing software too. These days I'm
+deep in the agentic AI world — always dabbling, always building something. Linux
+enthusiast through and through.
+
+## Some things I believe
+
+- Christ is Lord.
+- Simple things are easier to keep alive.
+- Operations teaches you what actually breaks; development teaches you why.
+- The agentic era is the most exciting shift I've seen in twelve years of doing this.
+- Family first. Everything else is details.
+
+## Some things I've built
+
+- [Binder](https://binder.school)
+- [Omarchy MX Control](https://omarchyplugins.com/plugin.html?id=io.github.zachwilke.mx)
+- [mylight](https://github.com/zachwilke/mylight)
+
+## Elsewhere
+
+- [GitHub](https://github.com/zachwilke)
+- [X](https://x.com/zachwilke_1)
+- [Hey World](https://world.hey.com/zwilke)
+- [Email](mailto:zach@pinefall.dev)
