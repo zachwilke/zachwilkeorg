@@ -1,0 +1,9 @@
+// Assets-only Worker. No build step, no npm.
+// Name must match the Cloudflare dashboard Worker (zachwilkeorg).
+{
+  "name": "zachwilkeorg",
+  "compatibility_date": "2026-08-31",
+  "assets": {
+    "directory": "."
+  }
+}
