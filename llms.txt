@@ -5,6 +5,7 @@
 > enthusiast. Husband to Hannah, father to four.
 
 Personal site: https://zachwilke.org/ — a single page, no tracking, no build step.
+Blog: https://zachwilke.org/blog/ — markdown files in /posts/, rendered in the browser.
 Contact: zach@pinefall.dev
 
 ## Now
@@ -26,6 +27,12 @@ enthusiast through and through.
 - [Binder](https://binder.school)
 - [Omarchy MX Control](https://omarchyplugins.com/plugin.html?id=io.github.zachwilke.mx)
 - [mylight](https://github.com/zachwilke/mylight)
+
+## Blog
+
+Public listing: https://zachwilke.org/blog/
+Posts are markdown in /posts/ with a slug list in /posts/index.json.
+Starter post (safe to delete): [Hello](https://zachwilke.org/blog/post.html?p=hello)
 
 ## Elsewhere
 

@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blog — Zach Wilke</title>
+<meta name="description" content="Posts by Zach Wilke.">
+<link rel="canonical" href="https://zachwilke.org/blog/">
+<link rel="alternate" type="text/markdown" href="/llms.txt" title="Plain-text version for LLMs and agents">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232c7a4b'/%3E%3Ctext x='50%25' y='52%25' font-size='34' font-family='Georgia,serif' fill='%23fdfcf9' text-anchor='middle' dominant-baseline='central'%3EZ%3C/text%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Blog — Zach Wilke">
+<meta property="og:description" content="Posts by Zach Wilke.">
+<meta property="og:url" content="https://zachwilke.org/blog/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="@zachwilke_1">
+
+<style>
+  :root {
+    --bg: #fdfcf9;
+    --text: #1a1f1c;
+    --muted: #5c6660;
+    --accent: #2c7a4b;
+    --accent-hover: #1e5e37;
+    --rule: #e3e0d8;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --serif: ui-serif, Georgia, "Iowan Old Style", "Times New Roman", serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #131715;
+      --text: #e6e4dd;
+      --muted: #96a09a;
+      --accent: #5fbf85;
+      --accent-hover: #82d4a3;
+      --rule: #2a312d;
+    }
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font: 1.0625rem/1.65 var(--sans);
+    max-width: 38rem;
+    margin: 0 auto;
+    padding: clamp(3rem, 12vh, 6rem) 1.5rem 6rem;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 7vw, 2.5rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  h1::after {
+    content: "";
+    display: block;
+    width: 2.25rem;
+    height: 3px;
+    margin-top: 1.1rem;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+
+  p { margin: 0.9rem 0; text-wrap: pretty; }
+  .lede { margin-top: 1.4rem; color: var(--muted); }
+
+  .site-nav {
+    margin-bottom: 1.4rem;
+    font-size: 0.875rem;
+  }
+  .site-nav a { color: var(--muted); text-decoration: none; }
+  .site-nav a:hover { color: var(--accent-hover); }
+
+  a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: color 0.15s ease, text-decoration-color 0.15s ease;
+  }
+  a:hover {
+    color: var(--accent-hover);
+    text-decoration-color: currentColor;
+  }
+  a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .post-list { list-style: none; margin-top: 2rem; }
+  .post-list li {
+    margin: 0 0 1.6rem;
+    padding-left: 0;
+  }
+  .post-list a {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    text-decoration: none;
+  }
+  .post-list a:hover { text-decoration: underline; }
+  .post-list time {
+    display: block;
+    margin-top: 0.2rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  .post-list .summary {
+    margin: 0.3rem 0 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+  .empty { margin-top: 2rem; color: var(--muted); }
+
+  ::selection { background: color-mix(in srgb, var(--accent) 25%, transparent); }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="site-nav" aria-label="On this site">
+    <a href="/">Zach Wilke</a>
+  </nav>
+  <h1>Blog</h1>
+</header>
+
+<main>
+  <noscript><p class="empty">This blog renders markdown in your browser. Enable JavaScript to read posts.</p></noscript>
+  <div id="posts"></div>
+</main>
+
+<script src="/vendor/markdown.js"></script>
+<script>
+(function () {
+  var CANONICAL = "https://zachwilke.org";
+
+  function formatDate(iso) {
+    var d = new Date(iso + "T00:00:00Z");
+    if (isNaN(d.getTime())) return iso || "";
+    return d.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      timeZone: "UTC"
+    });
+  }
+
+  function el(html) {
+    var t = document.createElement("template");
+    t.innerHTML = html.trim();
+    return t.content.firstElementChild;
+  }
+
+  async function loadPosts() {
+    var res = await fetch("/posts/index.json");
+    if (!res.ok) throw new Error("index");
+    var slugs = await res.json();
+    if (!Array.isArray(slugs)) throw new Error("index-shape");
+    var posts = await Promise.all(slugs.map(async function (slug) {
+      if (!slug || /[^a-z0-9-]/i.test(slug)) return null;
+      var r = await fetch("/posts/" + encodeURIComponent(slug) + ".md");
+      if (!r.ok) return null;
+      var parsed = parseFrontMatter(await r.text());
+      return {
+        slug: slug,
+        title: parsed.meta.title || slug,
+        date: parsed.meta.date || "",
+        summary: parsed.meta.summary || ""
+      };
+    }));
+    return posts.filter(Boolean).sort(function (a, b) {
+      return (b.date || "").localeCompare(a.date || "");
+    });
+  }
+
+  async function render() {
+    var root = document.getElementById("posts");
+    try {
+      var posts = await loadPosts();
+      if (!posts.length) {
+        root.appendChild(el('<p class="empty">No posts yet.</p>'));
+        return;
+      }
+      var list = document.createElement("ul");
+      list.className = "post-list";
+      posts.forEach(function (post) {
+        var item = document.createElement("li");
+        var link = document.createElement("a");
+        link.href = "/blog/post.html?p=" + encodeURIComponent(post.slug);
+        link.textContent = post.title;
+        item.appendChild(link);
+        if (post.date) {
+          var time = document.createElement("time");
+          time.dateTime = post.date;
+          time.textContent = formatDate(post.date);
+          item.appendChild(time);
+        }
+        if (post.summary) {
+          var sum = document.createElement("p");
+          sum.className = "summary";
+          sum.textContent = post.summary;
+          item.appendChild(sum);
+        }
+        list.appendChild(item);
+      });
+      root.appendChild(list);
+    } catch (err) {
+      root.appendChild(el('<p class="empty">Could not load posts.</p>'));
+    }
+  }
+
+  document.querySelector('link[rel="canonical"]').href = CANONICAL + "/blog/";
+
+  // Workers static hosting has no Pages _redirects rewrite. Honor a leftover
+  // /blog/slug or /blog/?p=slug by sending it to the real post URL.
+  var params = new URLSearchParams(location.search);
+  if (params.get("p")) {
+    location.replace("/blog/post.html?p=" + encodeURIComponent(params.get("p")));
+  } else {
+    var parts = location.pathname.replace(/\/+$/, "").split("/");
+    var last = parts[parts.length - 1] || "";
+    if (last && last !== "blog" && last !== "index.html") {
+      location.replace("/blog/post.html?p=" + encodeURIComponent(decodeURIComponent(last)));
+    } else {
+      render();
+    }
+  }
+})();
+</script>
+
+</body>
+</html>

@@ -84,6 +84,13 @@
   p { margin: 0.9rem 0; text-wrap: pretty; }
   .lede { margin-top: 1.4rem; color: var(--muted); }
 
+  .site-nav {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+  }
+  .site-nav a { color: var(--muted); text-decoration: none; }
+  .site-nav a:hover { color: var(--accent-hover); }
+
   ul { list-style: none; }
   li {
     margin: 0.45rem 0;
@@ -131,6 +138,9 @@
 <header>
   <h1>Zach Wilke</h1>
   <p class="lede">Director of Operations at an MSP in Texas. Husband to Hannah, father to four kids who are my world.</p>
+  <nav class="site-nav" aria-label="On this site">
+    <a href="/blog/">Blog</a>
+  </nav>
 </header>
 
 <main>
