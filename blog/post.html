@@ -213,7 +213,7 @@
     var title = parsed.meta.title || slug;
     var date = parsed.meta.date || "";
     var summary = parsed.meta.summary || "";
-    var path = "/blog/" + encodeURIComponent(slug);
+    var path = "/blog/post.html?p=" + encodeURIComponent(slug);
     var url = CANONICAL + path;
 
     document.getElementById("title").textContent = title;

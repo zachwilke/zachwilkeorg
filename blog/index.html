@@ -200,7 +200,7 @@
       posts.forEach(function (post) {
         var item = document.createElement("li");
         var link = document.createElement("a");
-        link.href = "/blog/" + encodeURIComponent(post.slug);
+        link.href = "/blog/post.html?p=" + encodeURIComponent(post.slug);
         link.textContent = post.title;
         item.appendChild(link);
         if (post.date) {
@@ -224,7 +224,21 @@
   }
 
   document.querySelector('link[rel="canonical"]').href = CANONICAL + "/blog/";
-  render();
+
+  // Workers static hosting has no Pages _redirects rewrite. Honor a leftover
+  // /blog/slug or /blog/?p=slug by sending it to the real post URL.
+  var params = new URLSearchParams(location.search);
+  if (params.get("p")) {
+    location.replace("/blog/post.html?p=" + encodeURIComponent(params.get("p")));
+  } else {
+    var parts = location.pathname.replace(/\/+$/, "").split("/");
+    var last = parts[parts.length - 1] || "";
+    if (last && last !== "blog" && last !== "index.html") {
+      location.replace("/blog/post.html?p=" + encodeURIComponent(decodeURIComponent(last)));
+    } else {
+      render();
+    }
+  }
 })();
 </script>
 

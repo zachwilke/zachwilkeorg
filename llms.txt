@@ -32,7 +32,7 @@ enthusiast through and through.
 
 Public listing: https://zachwilke.org/blog/
 Posts are markdown in /posts/ with a slug list in /posts/index.json.
-Starter post (safe to delete): [Hello](https://zachwilke.org/blog/hello)
+Starter post (safe to delete): [Hello](https://zachwilke.org/blog/post.html?p=hello)
 
 ## Elsewhere
 

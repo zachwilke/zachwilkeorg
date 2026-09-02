@@ -1,6 +1,0 @@
-# Clean post URLs on Cloudflare Pages. No build step.
-# Static rules first: /blog/ still serves blog/index.html. Assets live
-# outside /blog/ so the :slug rewrite cannot swallow CSS or JS.
-/blog/index.html /blog/ 301
-/blog/:slug/ /blog/:slug 301
-/blog/:slug /blog/post.html 200
