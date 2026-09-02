@@ -1,5 +1,6 @@
 # Humans and agents are both welcome here.
 # A plain-text version of this site lives at /llms.txt
+# The blog lives at /blog/ — posts are markdown files in /posts/
 
 User-agent: *
 Allow: /
