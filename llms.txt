@@ -32,7 +32,8 @@ enthusiast through and through.
 
 Public listing: https://zachwilke.org/blog/
 Posts are markdown in /posts/ with a slug list in /posts/index.json.
-Starter post (safe to delete): [Hello](https://zachwilke.org/blog/post.html?p=hello)
+- [One Week on Omarcy Quattro](https://zachwilke.org/blog/post.html?p=one-week-on-omarcy-quattro) — 2026-09-01
+- [The Beginning...](https://zachwilke.org/blog/post.html?p=the-beginning) — 2026-08-27
 
 ## Elsewhere
 
