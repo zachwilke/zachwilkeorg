@@ -12,7 +12,7 @@
   --accent: #155eef;
   --accent-hover: #0b4cc7;
   --focus: #155eef;
-  --nav-bg: rgba(245, 245, 247, 0.58);
+  --nav-bg: rgba(245, 245, 247, 0.72);
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 12px 32px rgba(0, 0, 0, 0.05);
   --radius: 20px;
   --radius-sm: 12px;
@@ -39,7 +39,7 @@
     --accent: #6b93ff;
     --accent-hover: #8aacff;
     --focus: #6b93ff;
-    --nav-bg: rgba(0, 0, 0, 0.55);
+    --nav-bg: rgba(22, 22, 24, 0.62);
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 16px 40px rgba(0, 0, 0, 0.35);
     --wash-blue: rgba(58, 92, 168, 0.32);
     --wash-purple: rgba(92, 72, 148, 0.26);
@@ -154,7 +154,7 @@ body::after {
   background: var(--nav-bg);
   backdrop-filter: saturate(190%) blur(24px);
   -webkit-backdrop-filter: saturate(190%) blur(24px);
-  border-bottom: 1px solid color-mix(in srgb, var(--hairline) 70%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--hairline) 85%, transparent);
 }
 
 .site-nav {
@@ -187,7 +187,7 @@ body::after {
   align-items: center;
   justify-content: flex-end;
   flex-wrap: nowrap;
-  gap: 0.15rem 1.85rem;
+  gap: 0.15rem 2.15rem;
   list-style: none;
 }
 
@@ -265,13 +265,13 @@ body::after {
   .nav-links a {
     justify-content: center;
     min-height: 2.85rem;
-    font-size: 0.8125rem;
+    font-size: 0.875rem;
   }
 
   .nav-links a[aria-current="page"]::after {
-    left: 22%;
-    right: 22%;
-    bottom: 0.45rem;
+    left: 18%;
+    right: 18%;
+    bottom: 0.4rem;
   }
 }
 
