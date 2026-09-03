@@ -3,11 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
 <title>Zach Wilke</title>
 <meta name="description" content="Zach Wilke — Director of Operations at a Texas MSP. Twelve years in IT operations, six writing software, currently deep in the agentic AI world.">
 <link rel="canonical" href="https://zachwilke.org/">
 <link rel="alternate" type="text/markdown" href="/llms.txt" title="Plain-text version for LLMs and agents">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232c7a4b'/%3E%3Ctext x='50%25' y='52%25' font-size='34' font-family='Georgia,serif' fill='%23fdfcf9' text-anchor='middle' dominant-baseline='central'%3EZ%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='4' fill='%230a1018'/%3E%3Crect x='4' y='4' width='56' height='56' rx='2' fill='none' stroke='%23b8f04a' stroke-width='2'/%3E%3Ctext x='50%25' y='54%25' font-size='32' font-family='ui-monospace,monospace' fill='%23b8f04a' text-anchor='middle' dominant-baseline='central'%3EZ%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="/assets/site.css">
 
 <meta property="og:type" content="profile">
 <meta property="og:title" content="Zach Wilke">
@@ -15,170 +17,65 @@
 <meta property="og:url" content="https://zachwilke.org/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:creator" content="@zachwilke_1">
-
-<style>
-  :root {
-    --bg: #fdfcf9;
-    --text: #1a1f1c;
-    --muted: #5c6660;
-    --accent: #2c7a4b;
-    --accent-hover: #1e5e37;
-    --rule: #e3e0d8;
-    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    --serif: ui-serif, Georgia, "Iowan Old Style", "Times New Roman", serif;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #131715;
-      --text: #e6e4dd;
-      --muted: #96a09a;
-      --accent: #5fbf85;
-      --accent-hover: #82d4a3;
-      --rule: #2a312d;
-    }
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html { -webkit-text-size-adjust: 100%; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font: 1.0625rem/1.65 var(--sans);
-    max-width: 38rem;
-    margin: 0 auto;
-    padding: clamp(3rem, 12vh, 6rem) 1.5rem 6rem;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-  }
-
-  h1 {
-    font-family: var(--serif);
-    font-size: clamp(2rem, 7vw, 2.5rem);
-    font-weight: 500;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
-  }
-  h1::after {
-    content: "";
-    display: block;
-    width: 2.25rem;
-    height: 3px;
-    margin-top: 1.1rem;
-    background: var(--accent);
-    border-radius: 2px;
-  }
-
-  h2 {
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--muted);
-    margin: 3rem 0 0.85rem;
-    padding-bottom: 0.55rem;
-    border-bottom: 1px solid var(--rule);
-  }
-
-  p { margin: 0.9rem 0; text-wrap: pretty; }
-  .lede { margin-top: 1.4rem; color: var(--muted); }
-
-  .site-nav {
-    margin-top: 1rem;
-    font-size: 0.875rem;
-  }
-  .site-nav a { color: var(--muted); text-decoration: none; }
-  .site-nav a:hover { color: var(--accent-hover); }
-
-  ul { list-style: none; }
-  li {
-    margin: 0.45rem 0;
-    padding-left: 1.15rem;
-    position: relative;
-    text-wrap: pretty;
-  }
-  li::before {
-    content: "";
-    position: absolute;
-    left: 0.05rem;
-    top: 0.72em;
-    width: 0.4rem;
-    height: 1px;
-    background: var(--accent);
-  }
-
-  a {
-    color: inherit;
-    text-decoration: underline;
-    text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent);
-    text-decoration-thickness: 1px;
-    text-underline-offset: 3px;
-    transition: color 0.15s ease, text-decoration-color 0.15s ease;
-  }
-  a:hover {
-    color: var(--accent-hover);
-    text-decoration-color: currentColor;
-  }
-  a:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 3px;
-    border-radius: 2px;
-  }
-
-  ::selection { background: color-mix(in srgb, var(--accent) 25%, transparent); }
-
-  @media (prefers-reduced-motion: reduce) {
-    * { transition: none !important; }
-  }
-</style>
 </head>
 <body>
 
-<header>
-  <h1>Zach Wilke</h1>
-  <p class="lede">Director of Operations at an MSP in Texas. Husband to Hannah, father to four kids who are my world.</p>
-  <nav class="site-nav" aria-label="On this site">
-    <a href="/blog/">Blog</a>
+<div class="site-shell">
+  <nav class="utility-bar" aria-label="Site">
+    <a href="/" aria-current="page">home</a>
+    <span class="sep" aria-hidden="true">·</span>
+    <a href="/blog/">blog</a>
+    <span class="sep" aria-hidden="true">·</span>
+    <a href="https://github.com/zachwilke">github</a>
+    <span class="sep" aria-hidden="true">·</span>
+    <a href="mailto:zach@pinefall.dev">email</a>
   </nav>
-</header>
 
-<main>
-  <section aria-labelledby="now">
-    <h2 id="now">Now</h2>
-    <p>Twelve years in IT operations, six of them writing software too. These days I'm deep in the agentic AI world — always dabbling, always building something. Linux enthusiast through and through.</p>
-  </section>
+  <div class="home-grid">
+    <header class="home-hero">
+      <p class="status-line">MSP · Texas · Linux</p>
+      <h1><span class="prompt">~</span> Zach Wilke</h1>
+      <p class="lede">Director of Operations at an MSP in Texas. Husband to Hannah, father to four kids who are my world.</p>
+    </header>
 
-  <section aria-labelledby="beliefs">
-    <h2 id="beliefs">Some things I believe</h2>
-    <ul>
-      <li>Christ is Lord.</li>
-      <li>Simple things are easier to keep alive.</li>
-      <li>Operations teaches you what actually breaks; development teaches you why.</li>
-      <li>The agentic era is the most exciting shift I've seen in twelve years of doing this.</li>
-      <li>Family first. Everything else is details.</li>
-    </ul>
-  </section>
+    <main class="home-sections">
+      <section class="panel" aria-labelledby="now">
+        <h2 id="now">Now</h2>
+        <p>Twelve years in IT operations, six of them writing software too. These days I'm deep in the agentic AI world — always dabbling, always building something. Linux enthusiast through and through.</p>
+      </section>
 
-  <section aria-labelledby="built">
-    <h2 id="built">Some things I've built</h2>
-    <ul>
-      <li><a href="https://binder.school">Binder</a></li>
-      <li><a href="https://omarchyplugins.com/plugin.html?id=io.github.zachwilke.mx">Omarchy MX Control</a></li>
-      <li><a href="https://github.com/zachwilke/mylight">mylight</a></li>
-    </ul>
-  </section>
+      <section class="panel" aria-labelledby="beliefs">
+        <h2 id="beliefs">Some things I believe</h2>
+        <ul>
+          <li>Christ is Lord.</li>
+          <li>Simple things are easier to keep alive.</li>
+          <li>Operations teaches you what actually breaks; development teaches you why.</li>
+          <li>The agentic era is the most exciting shift I've seen in twelve years of doing this.</li>
+          <li>Family first. Everything else is details.</li>
+        </ul>
+      </section>
 
-  <section aria-labelledby="elsewhere">
-    <h2 id="elsewhere">Elsewhere</h2>
-    <ul>
-      <li><a rel="me" href="https://github.com/zachwilke">GitHub</a></li>
-      <li><a rel="me" href="https://x.com/zachwilke_1">X</a></li>
-      <li><a rel="me" href="https://world.hey.com/zwilke">Hey World</a></li>
-      <li><a rel="me" href="mailto:zach@pinefall.dev">zach@pinefall.dev</a></li>
-    </ul>
-  </section>
-</main>
+      <section class="panel" aria-labelledby="built">
+        <h2 id="built">Some things I've built</h2>
+        <ul>
+          <li><a href="https://binder.school">Binder</a></li>
+          <li><a href="https://omarchyplugins.com/plugin.html?id=io.github.zachwilke.mx">Omarchy MX Control</a></li>
+          <li><a href="https://github.com/zachwilke/mylight">mylight</a></li>
+        </ul>
+      </section>
+
+      <section class="panel" aria-labelledby="elsewhere">
+        <h2 id="elsewhere">Elsewhere</h2>
+        <ul>
+          <li><a rel="me" href="https://github.com/zachwilke">GitHub</a></li>
+          <li><a rel="me" href="https://x.com/zachwilke_1">X</a></li>
+          <li><a rel="me" href="https://world.hey.com/zwilke">Hey World</a></li>
+          <li><a rel="me" href="mailto:zach@pinefall.dev">zach@pinefall.dev</a></li>
+        </ul>
+      </section>
+    </main>
+  </div>
+</div>
 
 <script type="application/ld+json">
 {
