@@ -3,12 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="dark light">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 <title>Zach Wilke</title>
 <meta name="description" content="Zach Wilke — Director of Operations at a Texas MSP. Twelve years in IT operations, six writing software, currently deep in the agentic AI world.">
 <link rel="canonical" href="https://zachwilke.org/">
 <link rel="alternate" type="text/markdown" href="/llms.txt" title="Plain-text version for LLMs and agents">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='4' fill='%230a1018'/%3E%3Crect x='4' y='4' width='56' height='56' rx='2' fill='none' stroke='%23b8f04a' stroke-width='2'/%3E%3Ctext x='50%25' y='54%25' font-size='32' font-family='ui-monospace,monospace' fill='%23b8f04a' text-anchor='middle' dominant-baseline='central'%3EZ%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23f5f5f7'/%3E%3Ctext x='50%25' y='54%25' font-size='34' font-family='-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif' font-weight='600' fill='%231d1d1f' text-anchor='middle' dominant-baseline='central'%3EZ%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="/assets/site.css">
 
 <meta property="og:type" content="profile">
@@ -20,31 +22,35 @@
 </head>
 <body>
 
-<div class="site-shell">
-  <nav class="utility-bar" aria-label="Site">
-    <a href="/" aria-current="page">home</a>
-    <span class="sep" aria-hidden="true">·</span>
-    <a href="/blog/">blog</a>
-    <span class="sep" aria-hidden="true">·</span>
-    <a href="https://github.com/zachwilke">github</a>
-    <span class="sep" aria-hidden="true">·</span>
-    <a href="mailto:zach@pinefall.dev">email</a>
-  </nav>
+<a class="skip-link" href="#main">Skip to content</a>
 
-  <div class="home-grid">
-    <header class="home-hero">
-      <p class="status-line">MSP · Texas · Linux</p>
-      <h1><span class="prompt">~</span> Zach Wilke</h1>
+<div class="site">
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Site">
+      <a class="wordmark" href="/" aria-current="page">Zach Wilke</a>
+      <div class="nav-links">
+        <a href="/" aria-current="page">Home</a>
+        <a href="/blog/">Blog</a>
+        <a href="https://github.com/zachwilke">GitHub</a>
+        <a href="mailto:zach@pinefall.dev">Email</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <header class="hero">
+      <p class="eyebrow">MSP · Texas · Linux</p>
+      <h1>Zach Wilke</h1>
       <p class="lede">Director of Operations at an MSP in Texas. Husband to Hannah, father to four kids who are my world.</p>
     </header>
 
-    <main class="home-sections">
-      <section class="panel" aria-labelledby="now">
+    <div class="stack">
+      <section class="card" aria-labelledby="now">
         <h2 id="now">Now</h2>
         <p>Twelve years in IT operations, six of them writing software too. These days I'm deep in the agentic AI world — always dabbling, always building something. Linux enthusiast through and through.</p>
       </section>
 
-      <section class="panel" aria-labelledby="beliefs">
+      <section class="card" aria-labelledby="beliefs">
         <h2 id="beliefs">Some things I believe</h2>
         <ul>
           <li>Christ is Lord.</li>
@@ -55,7 +61,7 @@
         </ul>
       </section>
 
-      <section class="panel" aria-labelledby="built">
+      <section class="card" aria-labelledby="built">
         <h2 id="built">Some things I've built</h2>
         <ul>
           <li><a href="https://binder.school">Binder</a></li>
@@ -64,7 +70,7 @@
         </ul>
       </section>
 
-      <section class="panel" aria-labelledby="elsewhere">
+      <section class="card" aria-labelledby="elsewhere">
         <h2 id="elsewhere">Elsewhere</h2>
         <ul>
           <li><a rel="me" href="https://github.com/zachwilke">GitHub</a></li>
@@ -73,8 +79,8 @@
           <li><a rel="me" href="mailto:zach@pinefall.dev">zach@pinefall.dev</a></li>
         </ul>
       </section>
-    </main>
-  </div>
+    </div>
+  </main>
 </div>
 
 <script type="application/ld+json">

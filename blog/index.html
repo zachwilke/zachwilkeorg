@@ -3,12 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="dark light">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 <title>Blog — Zach Wilke</title>
 <meta name="description" content="Posts by Zach Wilke.">
 <link rel="canonical" href="https://zachwilke.org/blog/">
 <link rel="alternate" type="text/markdown" href="/llms.txt" title="Plain-text version for LLMs and agents">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='4' fill='%230a1018'/%3E%3Crect x='4' y='4' width='56' height='56' rx='2' fill='none' stroke='%23b8f04a' stroke-width='2'/%3E%3Ctext x='50%25' y='54%25' font-size='32' font-family='ui-monospace,monospace' fill='%23b8f04a' text-anchor='middle' dominant-baseline='central'%3EZ%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23f5f5f7'/%3E%3Ctext x='50%25' y='54%25' font-size='34' font-family='-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif' font-weight='600' fill='%231d1d1f' text-anchor='middle' dominant-baseline='central'%3EZ%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="/assets/site.css">
 
 <meta property="og:type" content="website">
@@ -20,22 +22,26 @@
 </head>
 <body>
 
-<div class="site-shell">
-  <nav class="utility-bar" aria-label="Site">
-    <a href="/">home</a>
-    <span class="sep" aria-hidden="true">·</span>
-    <a href="/blog/" aria-current="page">blog</a>
-    <span class="sep" aria-hidden="true">·</span>
-    <a href="https://github.com/zachwilke">github</a>
-    <span class="sep" aria-hidden="true">·</span>
-    <a href="mailto:zach@pinefall.dev">email</a>
-  </nav>
+<a class="skip-link" href="#main">Skip to content</a>
 
-  <header class="page-header">
-    <h1><span class="prompt">~</span> Blog</h1>
+<div class="site">
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Site">
+      <a class="wordmark" href="/">Zach Wilke</a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="https://github.com/zachwilke">GitHub</a>
+        <a href="mailto:zach@pinefall.dev">Email</a>
+      </div>
+    </nav>
   </header>
 
-  <main>
+  <main id="main">
+    <header class="page-header">
+      <h1>Blog</h1>
+    </header>
+
     <noscript><p class="empty">This blog renders markdown in your browser. Enable JavaScript to read posts.</p></noscript>
     <div id="posts"></div>
   </main>
