@@ -116,7 +116,7 @@ home = home.replace(
   Array.from(
     { length: 14 },
     (_, i) =>
-      `<div class="apparatus-ring" style="--ring:${i};--offset:${(i - 6.5) * 17}px"></div>`,
+      `<div class="apparatus-ring" data-lens="${["operations", "software", "life"][i % 3]}" style="--ring:${i};--offset:${(i - 6.5) * 17}px"></div>`,
   ).join(""),
 );
 await write(

@@ -43,6 +43,11 @@
   const tilt = apparatus.querySelector(".apparatus-tilt");
   const motionButton = document.getElementById("motion-toggle");
   const explodeButton = document.getElementById("apparatus-explode");
+  const story = document.getElementById("apparatus-story");
+  const summary = apparatus.querySelector(".apparatus-summary");
+  const lenses = Array.from(
+    apparatus.querySelectorAll(".apparatus-lenses [data-lens]"),
+  );
   const reduced = matchMedia("(prefers-reduced-motion: reduce)");
   const finePointer = matchMedia("(hover: hover) and (pointer: fine)");
   let visible = false;
@@ -91,10 +96,32 @@
     paused = !paused;
     syncMotion();
   });
-  explodeButton.addEventListener("click", () => {
-    const expanded = apparatus.classList.toggle("is-exploded");
+  function syncPractice(expanded) {
+    apparatus.classList.toggle("is-exploded", expanded);
     explodeButton.setAttribute("aria-pressed", String(expanded));
-    explodeButton.textContent = expanded ? "Reassemble ↙" : "Disassemble ↗";
+    explodeButton.textContent = expanded
+      ? "Close the practice ↙"
+      : "See the practice ↗";
+  }
+  explodeButton.addEventListener("click", () => {
+    story.open = !story.open;
+    syncPractice(story.open);
+  });
+  story.addEventListener("toggle", () => syncPractice(story.open));
+  const lensCopy = {
+    operations: "Operations: make the system legible, then keep it moving.",
+    software: "Software: build small tools that earn their place through use.",
+    life: "Life: leave room for curiosity, family, and the work between the work.",
+  };
+  lenses.forEach((lens) => {
+    lens.addEventListener("click", () => {
+      const active = lens.dataset.lens;
+      apparatus.dataset.activeLens = active;
+      summary.textContent = lensCopy[active];
+      lenses.forEach((item) =>
+        item.setAttribute("aria-current", String(item === lens)),
+      );
+    });
   });
   stage.addEventListener("pointermove", (event) => {
     if (!finePointer.matches || reduced.matches || paused) return;

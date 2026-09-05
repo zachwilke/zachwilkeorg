@@ -40,15 +40,37 @@
         >
       </div>
       <figcaption id="apparatus-caption">
-        <span>A study in keeping things in motion.</span
-        ><span class="apparatus-controls" hidden
+        <div class="apparatus-caption-copy">
+          <span class="apparatus-summary" aria-live="polite"
+            >A study in keeping things in motion.</span
+          >
+          <nav class="apparatus-lenses" aria-label="Explore the field notes">
+            <a href="#writing" data-lens="operations">Operations</a>
+            <a href="#workbench" data-lens="software">Software</a>
+            <a href="#about" data-lens="life">Life</a>
+          </nav>
+        </div>
+        <span class="apparatus-controls" hidden
           ><button type="button" id="apparatus-explode" aria-pressed="false">
-            Disassemble <span aria-hidden="true">↗</span></button
+            See the practice <span aria-hidden="true">↗</span></button
           ><button type="button" id="motion-toggle" aria-pressed="false">
             Pause motion
           </button></span
         >
       </figcaption>
+      <details class="apparatus-story" id="apparatus-story">
+        <summary>An open practice <span aria-hidden="true">↘</span></summary>
+        <p class="eyebrow">
+          <span class="registration" aria-hidden="true">+</span> How the work moves
+        </p>
+        <ol>
+          <li><a href="#writing"><strong>Observe</strong><span>Keep a record of what is changing.</span></a></li>
+          <li><a href="#writing"><strong>Diagnose</strong><span>Find the constraint before reaching for a fix.</span></a></li>
+          <li><a href="#workbench"><strong>Build</strong><span>Make the smallest useful thing.</span></a></li>
+          <li><a href="#about"><strong>Operate</strong><span>Keep it useful, and learn from its use.</span></a></li>
+          <li><a href="#writing"><strong>Reflect</strong><span>Turn the work back into a field note.</span></a></li>
+        </ol>
+      </details>
     </figure>
     <div class="hero-foot">
       <span>Operations / Software / Life</span

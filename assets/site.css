@@ -440,6 +440,25 @@ button[hidden],
   justify-content: space-between;
   gap: 8px;
 }
+.apparatus-caption-copy {
+  display: grid;
+  gap: 10px;
+}
+.apparatus-lenses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.apparatus-lenses a {
+  color: var(--ink);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 2px;
+}
+.apparatus-lenses a:hover,
+.apparatus-lenses a[aria-current="true"] {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
 .apparatus-controls {
   display: flex;
   gap: 12px;
@@ -461,6 +480,77 @@ button[hidden],
 }
 .apparatus.is-exploded .orbit-one {
   transform: rotateX(70deg) rotateY(25deg) translateZ(55px);
+}
+.apparatus[data-active-lens] .apparatus-ring {
+  opacity: 0.18;
+}
+.apparatus[data-active-lens="operations"] .apparatus-ring[data-lens="operations"],
+.apparatus[data-active-lens="software"] .apparatus-ring[data-lens="software"],
+.apparatus[data-active-lens="life"] .apparatus-ring[data-lens="life"] {
+  opacity: 1;
+  border-color: var(--accent);
+  border-width: 2px;
+}
+.apparatus-story {
+  margin: 0 16px 14px;
+  padding: 15px 0 2px;
+  border-top: 1px solid var(--line);
+}
+.apparatus-story summary {
+  cursor: pointer;
+  color: var(--ink);
+  font-size: 9px;
+  list-style: none;
+}
+.apparatus-story summary::-webkit-details-marker {
+  display: none;
+}
+.apparatus-story summary span {
+  color: var(--accent);
+  display: inline-block;
+  margin-left: 5px;
+}
+.apparatus-story[open] summary span {
+  transform: rotate(180deg);
+}
+.apparatus-story .eyebrow {
+  margin: 0 0 12px;
+}
+.apparatus-story ol {
+  list-style: none;
+  counter-reset: practice;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+}
+.apparatus-story li {
+  counter-increment: practice;
+  border-left: 1px solid var(--line);
+}
+.apparatus-story li:first-child {
+  border-left: 0;
+}
+.apparatus-story a {
+  display: grid;
+  gap: 6px;
+  padding: 0 10px;
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.45;
+}
+.apparatus-story a::before {
+  content: "0" counter(practice);
+  color: var(--accent);
+  font: 10px var(--mono);
+}
+.apparatus-story strong {
+  color: var(--ink);
+  font: inherit;
+  text-transform: uppercase;
+}
+.apparatus-story a:hover strong {
+  color: var(--accent);
 }
 /* Editorial rhythm; strong rules instead of containers. */
 .section-space {
@@ -1206,6 +1296,19 @@ button[hidden],
   .apparatus figcaption {
     font-size: 9px;
   }
+  .apparatus-story ol {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .apparatus-story li:nth-child(odd) {
+    border-left: 0;
+  }
+  .apparatus-story li:nth-child(n + 3) {
+    border-top: 1px solid var(--line);
+    padding-top: 10px;
+  }
+  .apparatus-story a {
+    padding: 8px 10px;
+  }
   .hero-foot {
     font-size: 8px;
     padding: 14px 0;
@@ -1425,6 +1528,20 @@ button[hidden],
   .hero h1 {
     font-size: 64px;
   }
+  .apparatus figcaption {
+    align-items: flex-start;
+  }
+  .apparatus-story ol {
+    grid-template-columns: 1fr;
+  }
+  .apparatus-story li,
+  .apparatus-story li:nth-child(odd) {
+    border-left: 0;
+  }
+  .apparatus-story li:nth-child(n + 2) {
+    border-top: 1px solid var(--line);
+    padding-top: 8px;
+  }
   .project {
     grid-template-columns: 112px 1fr;
     gap: 8px 17px;
@@ -1507,6 +1624,12 @@ button[hidden],
   }
   .apparatus button {
     padding: 8px 2px;
+  }
+  .apparatus-lenses a,
+  .apparatus-story summary {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
   .site-footer nav {
     gap: 2px 22px;
