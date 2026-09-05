@@ -1,20 +1,11 @@
 # Zach Wilke
 
-> Director of Operations at an MSP in Texas. Twelve years in IT operations, six of
-> them writing software too. Currently deep in the agentic AI world. Linux
-> enthusiast. Husband to Hannah, father to four.
+> Director of Operations at an MSP in Texas. Twelve years in IT operations, six writing software. Interested in agentic AI and Linux. Husband to Hannah, father to four.
 
-Personal site: https://zachwilke.org/ — a single page, no tracking, no build step.
-Blog: https://zachwilke.org/blog/ — markdown files in /posts/, rendered in the browser.
+Personal site: https://zachwilke.org/ — a static personal journal. No tracking.
 Contact: zach@pinefall.dev
 
-## Now
-
-Twelve years in IT operations, six of them writing software too. These days I'm
-deep in the agentic AI world — always dabbling, always building something. Linux
-enthusiast through and through.
-
-## Some things I believe
+## Beliefs
 
 - Christ is Lord.
 - Simple things are easier to keep alive.
@@ -22,22 +13,22 @@ enthusiast through and through.
 - The agentic era is the most exciting shift I've seen in twelve years of doing this.
 - Family first. Everything else is details.
 
-## Some things I've built
+## Projects
 
-- [Binder](https://binder.school)
-- [Omarchy MX Control](https://omarchyplugins.com/plugin.html?id=io.github.zachwilke.mx)
-- [mylight](https://github.com/zachwilke/mylight)
+- [Binder](https://binder.school): Homeschool planning, lessons, and records.
+- [Omarchy MX Control](https://omarchyplugins.com/plugin.html?id=io.github.zachwilke.mx): An Omarchy plugin.
+- [mylight](https://github.com/zachwilke/mylight): A family dashboard for calendars, chores, and meals.
 
-## Blog
+## Notebook
 
-Public listing: https://zachwilke.org/blog/
-Posts are markdown in /posts/ with a slug list in /posts/index.json.
-- [One Week on Omarcy Quattro](https://zachwilke.org/blog/post.html?p=one-week-on-omarcy-quattro) — 2026-09-01
-- [The Beginning...](https://zachwilke.org/blog/post.html?p=the-beginning) — 2026-08-27
+[All writing](https://zachwilke.org/blog/) · [RSS](https://zachwilke.org/feed.xml)
+- [One Week on Omarcy Quattro](https://zachwilke.org/blog/one-week-on-omarcy-quattro/) — 2026-09-01
+  Markdown source: https://zachwilke.org/posts/one-week-on-omarcy-quattro.md
+- [The Beginning...](https://zachwilke.org/blog/the-beginning/) — 2026-08-27
+  Markdown source: https://zachwilke.org/posts/the-beginning.md
 
 ## Elsewhere
 
 - [GitHub](https://github.com/zachwilke)
 - [X](https://x.com/zachwilke_1)
 - [Hey World](https://world.hey.com/zwilke)
-- [Email](mailto:zach@pinefall.dev)

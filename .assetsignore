@@ -1,0 +1,8 @@
+.git
+.DS_Store
+**/.DS_Store
+scripts
+templates
+README.md
+posts/README.md
+wrangler.jsonc
