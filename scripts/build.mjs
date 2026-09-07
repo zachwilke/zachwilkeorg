@@ -100,6 +100,8 @@ ${schema ? `<script type="application/ld+json">${JSON.stringify(schema).replace(
 </html>`;
 }
 
+const writingNote = `<p class="writing-note">Everything on this blog is written by me, not AI. These are my personal thoughts as I learn and build in the age of AI.</p>`;
+
 function postRow(post) {
   return `<article class="post-row" data-slug="${post.slug}"><time datetime="${post.date}">${date(post.date)}</time><div><h3><a href="${post.path}" class="post-row-link">${escape(post.title)}</a></h3><p>${escape(post.summary || "")}</p><span class="reading-time">${post.minutes} min read</span></div></article>`;
 }
@@ -157,7 +159,7 @@ await write(
       "Longer thoughts on software, Linux, operations, and life. Field notes by Zach Wilke.",
     path: "/blog/",
     page: "blog",
-    content: `<main id="main"><header class="notebook-header"><h1>Writing</h1><p>Notes on software, Linux, operations, and life.</p><a href="/feed.xml">Subscribe via RSS</a></header><section class="archive" aria-labelledby="archive-title"><h2 id="archive-title">All writing <span class="muted">(${posts.length})</span></h2><form role="search" id="archive-search" hidden><label for="search">Search the writing</label><div class="search-controls"><input id="search" type="search" placeholder="Search titles and full text…" autocomplete="off"><button type="reset">Clear</button></div><p id="search-status" role="status"></p></form><div id="archive-posts">${posts.length ? posts.map(postRow).join("\n") : "<p>First notes coming soon.</p>"}</div></section></main>`,
+    content: `<main id="main"><header class="notebook-header"><h1>Writing</h1><p>Notes on software, Linux, operations, and life.</p>${writingNote}<a href="/feed.xml">Subscribe via RSS</a></header><section class="archive" aria-labelledby="archive-title"><h2 id="archive-title">All writing <span class="muted">(${posts.length})</span></h2><form role="search" id="archive-search" hidden><label for="search">Search the writing</label><div class="search-controls"><input id="search" type="search" placeholder="Search titles and full text…" autocomplete="off"><button type="reset">Clear</button></div><p id="search-status" role="status"></p></form><div id="archive-posts">${posts.length ? posts.map(postRow).join("\n") : "<p>First notes coming soon.</p>"}</div></section></main>`,
   }),
 );
 
@@ -219,7 +221,7 @@ for (let i = 0; i < posts.length; i++) {
         author: { "@type": "Person", name: "Zach Wilke", url: origin },
         mainEntityOfPage: origin + post.path,
       },
-      content: `<main id="main"><header class="article-header"><a href="/blog/">← All writing</a><h1>${escape(post.title)}</h1><p class="article-byline"><time datetime="${post.date}">${date(post.date)}</time> · ${post.minutes} min read · Zach Wilke</p></header>${articleContents(post.body)}<article class="prose" aria-label="${escape(post.title)}">${renderArticle(post.body)}</article><div class="article-end"><p>Have a thought? <a href="mailto:zach@pinefall.dev?subject=${encodeURIComponent(`Re: ${post.title}`)}">Send me a note</a>.</p><div class="article-tools"><button type="button" id="copy-link" hidden>Copy article link</button><a href="/posts/${post.slug}.md">Markdown source</a><a href="/feed.xml">RSS</a></div><p id="copy-status" role="status"></p></div><nav class="read-next" aria-label="More writing">${posts[i - 1] ? `<a href="${posts[i - 1].path}">← Newer: ${escape(posts[i - 1].title)}</a>` : ""}${posts[i + 1] ? `<a href="${posts[i + 1].path}">Older: ${escape(posts[i + 1].title)} →</a>` : ""}</nav></main>`,
+      content: `<main id="main"><header class="article-header"><a href="/blog/">← All writing</a><h1>${escape(post.title)}</h1><p class="article-byline"><time datetime="${post.date}">${date(post.date)}</time> · ${post.minutes} min read · Zach Wilke</p></header>${articleContents(post.body)}<article class="prose" aria-label="${escape(post.title)}">${renderArticle(post.body)}</article><div class="article-end">${writingNote}<p>Have a thought? <a href="mailto:zach@pinefall.dev?subject=${encodeURIComponent(`Re: ${post.title}`)}">Send me a note</a>.</p><div class="article-tools"><button type="button" id="copy-link" hidden>Copy article link</button><a href="/posts/${post.slug}.md">Markdown source</a><a href="/feed.xml">RSS</a></div><p id="copy-status" role="status"></p></div><nav class="read-next" aria-label="More writing">${posts[i - 1] ? `<a href="${posts[i - 1].path}">← Newer: ${escape(posts[i - 1].title)}</a>` : ""}${posts[i + 1] ? `<a href="${posts[i + 1].path}">Older: ${escape(posts[i + 1].title)} →</a>` : ""}</nav></main>`,
     }),
   );
 }
