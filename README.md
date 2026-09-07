@@ -1,18 +1,20 @@
 # Zach Wilke — Personal Field Notes
 
-A personal notebook about operations, software, Linux, and life. Designed around **Field Apparatus**: olive paper, oversized typography, technical drawings, and a moving mechanical study.
+A personal notebook about operations, software, Linux, and life. A quiet, text-first design with a narrow reading column, simple navigation, and optional tools that stay out of the way.
 
 [Visit the site](https://zachwilke.org/) · [Read the notebook](https://zachwilke.org/blog/) · [Subscribe via RSS](https://zachwilke.org/feed.xml)
 
 ## What’s here
 
-- An interactive CSS 3D apparatus with pointer response, disassembly, and pause controls.
-- Recent writing, an illustrated project workbench, current interests, and personal principles.
-- A notebook archive and dedicated article pages with reading-time estimates and links to another post.
-- Light and dark themes, mobile layouts, reduced-motion support, keyboard navigation, and print styles.
+- An optional interactive CSS 3D study with pointer response, disassembly, and pause controls.
+- Recent writing, project links, current interests, and personal principles.
+- Full-text archive search with shareable query URLs and useful empty/error states.
+- Article pages with reading times, newer/older navigation, section links, automatic contents for longer posts, Markdown source links, and copy buttons for code and article URLs.
+- A generated 404 page with routes back to the site.
+- System, light, and dark themes with a saved preference, mobile layouts, reduced-motion support, keyboard navigation, and print styles.
 - A full-text RSS feed, sitemap, article metadata, and a [plain-text site guide](llms.txt).
 
-The site uses plain HTML, CSS, and JavaScript. There are no frontend frameworks, analytics, remote font requests, or runtime Markdown fetches. Articles and navigation work with JavaScript disabled. Fonts are self-hosted; the 3D apparatus uses the browser’s native animation API without WebGL or an animation library.
+The site uses plain HTML, CSS, and JavaScript. There are no frontend frameworks, analytics, remote font requests, or runtime Markdown fetches. Articles and navigation work with JavaScript disabled. The interface uses system fonts; the 3D apparatus uses the browser’s native animation API without WebGL or an animation library.
 
 ## Preview locally
 
@@ -62,7 +64,7 @@ Entries are sorted newest first by their date, regardless of their order in this
 node scripts/build.mjs
 ```
 
-This updates the homepage’s three latest entries, notebook archive, individual article pages, RSS feed, sitemap, and `llms.txt`. Preview the result locally before pushing.
+This updates the homepage’s three latest entries, notebook archive, individual article pages, search index, 404 page, RSS feed, sitemap, and `llms.txt`. Preview the result locally before pushing.
 
 The example post’s URL will be `https://zachwilke.org/blog/my-next-post/`.
 
@@ -73,7 +75,7 @@ Commit both the Markdown source and generated output. For the example above:
 ```sh
 git add posts/my-next-post.md posts/index.json \
   blog/my-next-post/index.html blog/index.html blog/post.html \
-  index.html feed.xml sitemap.xml llms.txt
+  index.html 404.html assets/search.json feed.xml sitemap.xml llms.txt
 git commit -m "Add My Next Post"
 git push origin main
 ```
@@ -84,18 +86,18 @@ To edit an existing post, change its Markdown, regenerate, and commit the update
 
 ## Where to make changes
 
-| File | Purpose |
-| --- | --- |
-| [templates/home.html](templates/home.html) | Homepage copy, sections, and project illustrations |
-| [scripts/build.mjs](scripts/build.mjs) | Shared layout, archive, article pages, and publishing helper |
-| [assets/site.css](assets/site.css) | Typography, colors, layouts, and responsive styles |
-| [assets/site.js](assets/site.js) | Apparatus interaction, motion controls, Texas clock, and legacy post links |
-| [posts/](posts/) | Markdown posts and the post index |
-| [vendor/markdown.js](vendor/markdown.js) | Local Markdown renderer used during generation |
-| [wrangler.jsonc](wrangler.jsonc) | Cloudflare Worker static assets configuration |
-| [.assetsignore](.assetsignore) | Files excluded from the static assets upload |
+| File                                       | Purpose                                                                                           |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------- |
+| [templates/home.html](templates/home.html) | Homepage copy, projects, and optional mechanical study                                            |
+| [scripts/build.mjs](scripts/build.mjs)     | Shared layout, archive, article pages, and publishing helper                                      |
+| [assets/site.css](assets/site.css)         | Typography, colors, layouts, and responsive styles                                                |
+| [assets/site.js](assets/site.js)           | Search, theme preference, copy buttons, apparatus interaction, Texas clock, and legacy post links |
+| [posts/](posts/)                           | Markdown posts and the post index                                                                 |
+| [vendor/markdown.js](vendor/markdown.js)   | Local Markdown renderer used during generation                                                    |
+| [wrangler.jsonc](wrangler.jsonc)           | Cloudflare Worker static assets configuration                                                     |
+| [.assetsignore](.assetsignore)             | Files excluded from the static assets upload                                                      |
 
-`index.html`, the HTML under `blog/`, `feed.xml`, `sitemap.xml`, and `llms.txt` are generated files. Make lasting changes in their sources and run the publishing helper rather than editing those outputs directly.
+`index.html`, `404.html`, `assets/search.json`, the HTML under `blog/`, `feed.xml`, `sitemap.xml`, and `llms.txt` are generated files. Make lasting changes in their sources and run the publishing helper rather than editing those outputs directly.
 
 ## Hosting and compatibility
 
@@ -107,4 +109,4 @@ The apparatus pauses while offscreen or when the tab is hidden. Reduced-motion p
 
 ## Typography
 
-IBM Plex Mono Regular’s Latin subset is self-hosted under the [SIL Open Font License](assets/fonts/OFL.txt). Body text uses system fonts and Georgia.
+The site uses system sans-serif and monospace fonts with no font requests. The previously used IBM Plex Mono subset remains available under the [SIL Open Font License](assets/fonts/OFL.txt).

@@ -56,7 +56,6 @@ const date = (iso) =>
     year: "numeric",
     timeZone: "UTC",
   });
-const serial = (n) => String(n).padStart(2, "0");
 const year = Math.max(2026, ...posts.map((p) => Number(p.date.slice(0, 4))));
 
 function layout({ title, description, path, content, page = "home", schema }) {
@@ -67,12 +66,13 @@ function layout({ title, description, path, content, page = "home", schema }) {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#eae9d8">
+<meta name="theme-color" content="#faf9f6">
 <title>${escape(title)}</title>
 <meta name="description" content="${escape(description)}">
+${page === "error" ? '<meta name="robots" content="noindex">' : ""}
 <link rel="canonical" href="${origin}${path}">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-<link rel="preload" href="/assets/fonts/ibm-plex-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
+
 <link rel="stylesheet" href="/assets/site.css">
 <link rel="alternate" type="application/rss+xml" title="Zach Wilke — Field Notes" href="/feed.xml">
 <link rel="alternate" type="text/markdown" href="/llms.txt" title="Plain-text site guide">
@@ -83,25 +83,25 @@ function layout({ title, description, path, content, page = "home", schema }) {
 <meta name="twitter:card" content="summary">
 <meta name="twitter:creator" content="@zachwilke_1">
 ${schema ? `<script type="application/ld+json">${JSON.stringify(schema).replace(/</g, "\\u003c")}</script>` : ""}
+<script>try { const theme = localStorage.getItem("theme"); if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme; } catch {}</script>
 <script src="/assets/site.js" defer></script>
 </head>
 <body class="page-${page}">
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="site-shell">
   <header class="site-header">
-    <a class="wordmark" href="/" aria-label="Zach Wilke — home">ZW<span class="wordmark-cross" aria-hidden="true">✳</span><span class="wordmark-label">Personal<br>field notes</span></a>
-    <nav class="site-nav" aria-label="Main navigation"><a href="/blog/"${blog ? ' aria-current="page"' : ""}>Writing</a><a href="/#workbench">Workbench</a><a href="/#about">About</a></nav>
-    <div class="header-location"><span class="status-dot" aria-hidden="true"></span> Texas, USA <time id="texas-time" aria-label="Current time in Texas"></time></div>
+    <a class="wordmark" href="/">Zach Wilke</a>
+    <nav class="site-nav" aria-label="Main navigation"><a href="/"${page === "home" ? ' aria-current="page"' : ""}>About</a><a href="/blog/"${blog ? ' aria-current="page"' : ""}>Writing</a><a href="/#workbench">Projects</a></nav>
   </header>
-  ${content}
-  <footer class="site-footer"><div class="footer-top"><p>A little corner of the internet.<br><span>Always a work in progress.</span></p><nav aria-label="Elsewhere"><a rel="me" href="https://github.com/zachwilke">GitHub ↗</a><a rel="me" href="https://x.com/zachwilke_1">X ↗</a><a rel="me" href="https://world.hey.com/zwilke">Hey World ↗</a><a href="/feed.xml">RSS ↗</a><a rel="me" href="mailto:zach@pinefall.dev">Email ↗</a></nav></div><div class="footer-signature" aria-hidden="true">Keep <em>making.</em><span>↗</span></div><div class="footer-bottom"><span>© ${year} Zach Wilke</span><span>Texas / Faith / Family / Curiosity</span><a href="#" aria-label="Back to top">Back to top ↑</a></div></footer>
+  ${content.replace('<main id="main"', '<main id="main" tabindex="-1"')}
+  <footer class="site-footer"><nav aria-label="Elsewhere"><a rel="me" href="mailto:zach@pinefall.dev">Email</a><a rel="me" href="https://github.com/zachwilke">GitHub</a><a rel="me" href="https://x.com/zachwilke_1">X</a><a rel="me" href="https://world.hey.com/zwilke">Hey World</a><a href="/feed.xml">RSS</a></nav><div class="footer-bottom"><span>© ${year} Zach Wilke</span><span>Texas <time id="texas-time" aria-label="Current time in Texas"></time></span><button id="theme-toggle" hidden type="button">Theme: system</button><a href="#main">Back to top ↑</a></div></footer>
 </div>
 </body>
 </html>`;
 }
 
-function postRow(post, index) {
-  return `<article class="post-row"><a href="${post.path}" class="post-row-link"><span class="post-serial">${serial(posts.length - index)}</span><div class="post-info"><div class="post-meta"><time datetime="${post.date}">${date(post.date)}</time><span>${post.minutes} min read</span></div><h3>${escape(post.title)}</h3><p>${escape(post.summary || "")}</p></div><span class="post-arrow" aria-hidden="true">↗</span></a></article>`;
+function postRow(post) {
+  return `<article class="post-row" data-slug="${post.slug}"><time datetime="${post.date}">${date(post.date)}</time><div><h3><a href="${post.path}" class="post-row-link">${escape(post.title)}</a></h3><p>${escape(post.summary || "")}</p><span class="reading-time">${post.minutes} min read</span></div></article>`;
 }
 
 let home = await read("templates/home.html");
@@ -157,13 +157,52 @@ await write(
       "Longer thoughts on software, Linux, operations, and life. Field notes by Zach Wilke.",
     path: "/blog/",
     page: "blog",
-    content: `<main id="main"><header class="notebook-header"><p class="eyebrow">An ongoing collection / ${serial(posts.length)} entries</p><h1>The<br><em>notebook.</em></h1><div class="notebook-intro"><p>Things I'm trying. Things I'm learning.<br>A place to think out loud.</p><a class="text-link" href="/feed.xml">Follow via RSS <span aria-hidden="true">↗</span></a></div><div class="notebook-mark" aria-hidden="true"><span>FIELD<br>NOTES</span><i>ZW.</i></div></header><section class="archive" aria-labelledby="archive-title"><div class="section-heading"><h2 id="archive-title">All entries</h2><span class="eyebrow">Newest first</span></div>${posts.length ? posts.map(postRow).join("\n") : "<p>First notes coming soon.</p>"}</section><aside class="archive-note"><span aria-hidden="true">↳</span><p>Mostly for me to look back on later.<br>But I'm glad you found your way here.</p><a class="text-link" href="/#about">Meet the author ↗</a></aside></main>`,
+    content: `<main id="main"><header class="notebook-header"><h1>Writing</h1><p>Notes on software, Linux, operations, and life.</p><a href="/feed.xml">Subscribe via RSS</a></header><section class="archive" aria-labelledby="archive-title"><h2 id="archive-title">All writing <span class="muted">(${posts.length})</span></h2><form role="search" id="archive-search" hidden><label for="search">Search the writing</label><div class="search-controls"><input id="search" type="search" placeholder="Search titles and full text…" autocomplete="off"><button type="reset">Clear</button></div><p id="search-status" role="status"></p></form><div id="archive-posts">${posts.length ? posts.map(postRow).join("\n") : "<p>First notes coming soon.</p>"}</div></section></main>`,
+  }),
+);
+
+function renderArticle(body) {
+  let index = 0;
+  return markdown
+    .renderMarkdown(body)
+    .replace(
+      /<h([1-6])>([\s\S]*?)<\/h\1>/g,
+      (_, level, text) =>
+        `<h${level} id="section-${++index}">${text} <a class="heading-anchor" href="#section-${index}" aria-label="Link to section ${index}">#</a></h${level}>`,
+    );
+}
+function articleContents(body) {
+  const headings = [
+    ...renderArticle(body).matchAll(
+      /<h([1-6]) id="([^"]+)">([\s\S]*?) <a class="heading-anchor"/g,
+    ),
+  ];
+  return headings.length > 1
+    ? `<details class="toc"><summary>On this page</summary><ul>${headings.map((h) => `<li><a href="#${h[2]}">${h[3].replace(/<[^>]*>/g, "")}</a></li>`).join("")}</ul></details>`
+    : "";
+}
+await write(
+  "assets/search.json",
+  JSON.stringify(
+    posts.map(({ slug, title, summary, body }) => ({
+      slug,
+      text: [title, summary, body].filter(Boolean).join(" "),
+    })),
+  ),
+);
+await write(
+  "404.html",
+  layout({
+    title: "Page not found — Zach Wilke",
+    description: "Find your way back to Zach Wilke’s personal site.",
+    path: "/404.html",
+    page: "error",
+    content: `<main id="main"><h1>Page not found</h1><p>This link may have moved, or the page may no longer exist.</p><p><a href="/">Back home</a> · <a href="/blog/">Browse the writing</a></p></main>`,
   }),
 );
 
 for (let i = 0; i < posts.length; i++) {
   const post = posts[i];
-  const next = posts[i + 1] || posts[i - 1];
   await write(
     `blog/${post.slug}/index.html`,
     layout({
@@ -180,7 +219,7 @@ for (let i = 0; i < posts.length; i++) {
         author: { "@type": "Person", name: "Zach Wilke", url: origin },
         mainEntityOfPage: origin + post.path,
       },
-      content: `<main id="main"><header class="article-header"><a class="text-link" href="/blog/">← Back to the notebook</a><div class="article-label"><span>Field note ${serial(posts.length - i)}</span><span>${post.minutes} min read</span></div><h1>${escape(post.title)}</h1><div class="article-byline"><span>By Zach Wilke</span><time datetime="${post.date}">${date(post.date)}</time></div></header><div class="article-layout"><aside class="article-margin"><span class="eyebrow">From the notebook</span><span class="margin-serial" aria-hidden="true">${serial(posts.length - i)}</span><span>Operations.<br>Software.<br>Life.</span></aside><article class="prose" aria-label="${escape(post.title)}">${markdown.renderMarkdown(post.body)}<div class="end-mark" aria-hidden="true">✳</div></article></div><div class="article-end"><p>Thanks for reading.<br><span>Have a thought? I'd like to hear it.</span></p><a class="text-link" href="mailto:zach@pinefall.dev?subject=${encodeURIComponent(`Re: ${post.title}`)}">Send me a note ↗</a></div>${next ? `<section class="read-next" aria-label="Another field note"><p class="eyebrow">Keep exploring</p><a href="${next.path}">${escape(next.title)} <span aria-hidden="true">↗</span></a></section>` : ""}</main>`,
+      content: `<main id="main"><header class="article-header"><a href="/blog/">← All writing</a><h1>${escape(post.title)}</h1><p class="article-byline"><time datetime="${post.date}">${date(post.date)}</time> · ${post.minutes} min read · Zach Wilke</p></header>${articleContents(post.body)}<article class="prose" aria-label="${escape(post.title)}">${renderArticle(post.body)}</article><div class="article-end"><p>Have a thought? <a href="mailto:zach@pinefall.dev?subject=${encodeURIComponent(`Re: ${post.title}`)}">Send me a note</a>.</p><div class="article-tools"><button type="button" id="copy-link" hidden>Copy article link</button><a href="/posts/${post.slug}.md">Markdown source</a><a href="/feed.xml">RSS</a></div><p id="copy-status" role="status"></p></div><nav class="read-next" aria-label="More writing">${posts[i - 1] ? `<a href="${posts[i - 1].path}">← Newer: ${escape(posts[i - 1].title)}</a>` : ""}${posts[i + 1] ? `<a href="${posts[i + 1].path}">Older: ${escape(posts[i + 1].title)} →</a>` : ""}</nav></main>`,
     }),
   );
 }

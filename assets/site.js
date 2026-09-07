@@ -22,6 +22,136 @@
       message.textContent =
         "That field note could not be found. You can explore the notebook below.";
   }
+  const themeButton = document.getElementById("theme-toggle");
+  let theme = document.documentElement.dataset.theme || "system";
+  function syncTheme() {
+    if (theme === "system") delete document.documentElement.dataset.theme;
+    else document.documentElement.dataset.theme = theme;
+    themeButton.textContent = `Theme: ${theme}`;
+    themeButton.setAttribute(
+      "aria-label",
+      `Color theme: ${theme}. Switch to ${theme === "system" ? "light" : theme === "light" ? "dark" : "system"}.`,
+    );
+  }
+  if (themeButton) {
+    themeButton.hidden = false;
+    syncTheme();
+    themeButton.addEventListener("click", () => {
+      theme =
+        theme === "system" ? "light" : theme === "light" ? "dark" : "system";
+      try {
+        localStorage.setItem("theme", theme);
+      } catch {}
+      syncTheme();
+    });
+  }
+  const searchForm = document.getElementById("archive-search");
+  if (searchForm) {
+    const input = document.getElementById("search");
+    const status = document.getElementById("search-status");
+    const rows = [...document.querySelectorAll("#archive-posts .post-row")];
+    let searchIndex;
+    let pending;
+    searchForm.hidden = false;
+    input.value = new URLSearchParams(location.search).get("q") || "";
+    const normalize = (text) =>
+      text
+        .normalize("NFKD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase();
+    async function filter() {
+      const query = input.value.trim();
+      const url = new URL(location.href);
+      if (query) url.searchParams.set("q", query);
+      else url.searchParams.delete("q");
+      history.replaceState(null, "", url);
+      if (!query) {
+        rows.forEach((row) => (row.hidden = false));
+        status.textContent = "";
+        return;
+      }
+      status.textContent = "Searching…";
+      try {
+        if (!searchIndex) {
+          pending ||= fetch("/assets/search.json")
+            .then((response) => {
+              if (!response.ok) throw new Error("Search unavailable");
+              return response.json();
+            })
+            .catch((error) => {
+              pending = null;
+              throw error;
+            });
+          searchIndex = await pending;
+        }
+        if (query !== input.value.trim()) return;
+        const terms = normalize(query).split(/\s+/);
+        const matching = new Set(
+          searchIndex
+            .filter((post) =>
+              terms.every((term) => normalize(post.text).includes(term)),
+            )
+            .map((post) => post.slug),
+        );
+        rows.forEach((row) => (row.hidden = !matching.has(row.dataset.slug)));
+        status.textContent = matching.size
+          ? `${matching.size} ${matching.size === 1 ? "entry" : "entries"} found.`
+          : "No entries found. Try a different word or clear your search.";
+      } catch {
+        if (query !== input.value.trim()) return;
+        rows.forEach((row) => (row.hidden = false));
+        status.textContent =
+          "Search is temporarily unavailable. All writing is listed below.";
+      }
+    }
+    searchForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      filter();
+    });
+    input.addEventListener("input", filter);
+    searchForm.addEventListener("reset", () => {
+      input.value = "";
+      filter();
+      input.focus();
+    });
+    if (input.value) filter();
+  }
+  const copyLink = document.getElementById("copy-link");
+  if (copyLink && navigator.clipboard) {
+    copyLink.hidden = false;
+    copyLink.addEventListener("click", async () => {
+      const status = document.getElementById("copy-status");
+      try {
+        await navigator.clipboard.writeText(
+          document.querySelector('link[rel="canonical"]').href,
+        );
+        status.textContent = "Article link copied.";
+      } catch {
+        status.textContent =
+          "Could not copy. You can copy the address from your browser.";
+      }
+    });
+  }
+  if (navigator.clipboard)
+    document.querySelectorAll(".prose pre").forEach((pre) => {
+      const code = pre.querySelector("code");
+      if (!code) return;
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "code-copy";
+      button.textContent = "Copy code";
+      button.setAttribute("aria-live", "polite");
+      button.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(code.textContent);
+          button.textContent = "Copied";
+        } catch {
+          button.textContent = "Could not copy — select the code";
+        }
+        setTimeout(() => (button.textContent = "Copy code"), 2500);
+      });
+      pre.prepend(button);
+    });
   const time = document.getElementById("texas-time");
   function updateTime() {
     if (!time || document.hidden) return;
@@ -35,6 +165,7 @@
     }).format(now);
   }
   updateTime();
+  document.addEventListener("visibilitychange", updateTime);
   if (time) setInterval(updateTime, 60000);
   const apparatus = document.querySelector(".apparatus");
   if (!apparatus) return;
