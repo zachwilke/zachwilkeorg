@@ -1,8 +1,12 @@
 .git
 .DS_Store
 **/.DS_Store
-scripts
+src
+Makefile
 templates
 README.md
 posts/README.md
 wrangler.jsonc
+.gitignore
+sitegen
+test_markdown

@@ -14,20 +14,38 @@ A personal notebook about operations, software, Linux, and life. A quiet, text-f
 - System, light, and dark themes with a saved preference, mobile layouts, reduced-motion support, keyboard navigation, and print styles.
 - A full-text RSS feed, sitemap, article metadata, and a [plain-text site guide](llms.txt).
 
-The site uses plain HTML, CSS, and JavaScript. There are no frontend frameworks, analytics, remote font requests, or runtime Markdown fetches. Articles and navigation work with JavaScript disabled. The interface uses system fonts; the 3D apparatus uses the browser’s native animation API without WebGL or an animation library.
+The published site is plain HTML, CSS, and a small amount of optional browser JavaScript. There are no frontend frameworks, analytics, remote font requests, or runtime Markdown fetches. Articles and navigation work with JavaScript disabled. The interface uses system fonts; the 3D apparatus uses the browser’s native animation API without WebGL or an animation library.
+
+The **site generator is written in C**. Markdown posts stay as editable source. A C11 program reads them, renders HTML, and writes the static files that Cloudflare serves.
 
 ## Preview locally
 
-Use Node.js to generate pages and Python 3 to serve them locally. No `npm install` is required.
+You need a C11 compiler (`cc`) and `make`. Python 3 is optional and only used to serve the generated files.
 
 ```sh
 git clone https://github.com/zachwilke/zachwilkeorg.git
 cd zachwilkeorg
-node scripts/build.mjs
+make site
 python3 -m http.server 8080 --bind 127.0.0.1
 ```
 
-Open [http://127.0.0.1:8080](http://127.0.0.1:8080). Refresh after editing CSS or JavaScript. Run the publishing helper again after editing Markdown, templates, or the shared layout.
+`make` compiles `sitegen`. `make site` compiles it if needed and runs it from the repository root. The program emits:
+
+| Output | What it is |
+| --- | --- |
+| `index.html` | Homepage, including the three latest notes |
+| `blog/index.html` | Writing archive |
+| `blog/<slug>/index.html` | One page per post |
+| `blog/post.html` | Compatibility page for older `?p=` links |
+| `404.html` | Not-found page |
+| `assets/search.json` | Full-text search index |
+| `feed.xml` | RSS feed |
+| `sitemap.xml` | Sitemap |
+| `llms.txt` | Plain-text site guide |
+
+Open [http://127.0.0.1:8080](http://127.0.0.1:8080). Refresh after editing CSS or browser JavaScript. Run `make site` again after editing Markdown, the homepage template, or the generator.
+
+`make test` compiles a Markdown helper test binary, runs it, then regenerates the site.
 
 ## Publish a post
 
@@ -61,7 +79,7 @@ Entries are sorted newest first by their date, regardless of their order in this
 ### 3. Generate and preview
 
 ```sh
-node scripts/build.mjs
+make site
 ```
 
 This updates the homepage’s three latest entries, notebook archive, individual article pages, search index, 404 page, RSS feed, sitemap, and `llms.txt`. Preview the result locally before pushing.
@@ -86,22 +104,22 @@ To edit an existing post, change its Markdown, regenerate, and commit the update
 
 ## Where to make changes
 
-| File                                       | Purpose                                                                                           |
-| ------------------------------------------ | ------------------------------------------------------------------------------------------------- |
-| [templates/home.html](templates/home.html) | Homepage copy, projects, and optional mechanical study                                            |
-| [scripts/build.mjs](scripts/build.mjs)     | Shared layout, archive, article pages, and publishing helper                                      |
-| [assets/site.css](assets/site.css)         | Typography, colors, layouts, and responsive styles                                                |
-| [assets/site.js](assets/site.js)           | Search, theme preference, copy buttons, apparatus interaction, Texas clock, and legacy post links |
-| [posts/](posts/)                           | Markdown posts and the post index                                                                 |
-| [vendor/markdown.js](vendor/markdown.js)   | Local Markdown renderer used during generation                                                    |
-| [wrangler.jsonc](wrangler.jsonc)           | Cloudflare Worker static assets configuration                                                     |
-| [.assetsignore](.assetsignore)             | Files excluded from the static assets upload                                                      |
+| File | Purpose |
+| --- | --- |
+| [templates/home.html](templates/home.html) | Homepage copy, projects, and optional mechanical study |
+| [src/](src/) | C site generator: layout, archive, article pages, Markdown |
+| [Makefile](Makefile) | Compiles `sitegen` and regenerates the static site |
+| [assets/site.css](assets/site.css) | Typography, colors, layouts, and responsive styles |
+| [assets/site.js](assets/site.js) | Search, theme preference, copy buttons, apparatus interaction, Texas clock, and legacy post links |
+| [posts/](posts/) | Markdown posts and the post index |
+| [wrangler.jsonc](wrangler.jsonc) | Cloudflare Worker static assets configuration |
+| [.assetsignore](.assetsignore) | Files excluded from the static assets upload |
 
-`index.html`, `404.html`, `assets/search.json`, the HTML under `blog/`, `feed.xml`, `sitemap.xml`, and `llms.txt` are generated files. Make lasting changes in their sources and run the publishing helper rather than editing those outputs directly.
+`index.html`, `404.html`, `assets/search.json`, the HTML under `blog/`, `feed.xml`, `sitemap.xml`, and `llms.txt` are generated files. Make lasting changes in their sources and run `make site` rather than editing those outputs directly.
 
 ## Hosting and compatibility
 
-Cloudflare serves the committed files as static assets through the `zachwilkeorg` Worker. Generation happens before committing, so hosting needs no dependency installation or build step.
+Cloudflare serves the committed files as static assets through the `zachwilkeorg` Worker. Generation happens before committing, so hosting needs no compiler, Node, or other build step.
 
 Older `/blog/post.html?p=slug` and `/blog/?p=slug` links redirect to the matching published article when JavaScript is enabled. The compatibility page also provides ordinary article links without JavaScript.
 
