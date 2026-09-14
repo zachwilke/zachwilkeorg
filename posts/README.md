@@ -13,10 +13,10 @@
    ```
 
 2. Add `"your-slug"` to `posts/index.json`. Slugs use lowercase letters, digits, and single hyphens between words.
-3. Run `node scripts/build.mjs` from the repository root.
+3. Run `make site` from the repository root.
 4. Preview the site and commit the source and generated files together.
 
-Newest posts are listed first based on the date field. The publishing helper updates the homepage's three latest entries, full notebook index, individual static posts, RSS feed, sitemap, and `llms.txt` automatically. There is no deployment build or runtime Markdown fetching.
+Newest posts are listed first based on the date field. The C publisher updates the homepage's three latest entries, full notebook index, individual static posts, RSS feed, sitemap, and `llms.txt` automatically. There is no deployment build or runtime Markdown fetching.
 
 The canonical URL is `https://zachwilke.org/blog/your-slug/`. Old `/blog/post.html?p=your-slug` and `/blog/?p=your-slug` links are preserved with a JavaScript redirect; the compatibility page also provides ordinary links without JavaScript.
 

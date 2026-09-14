@@ -1,0 +1,5 @@
+sitegen
+sitegen.exe
+test_markdown
+test_markdown.exe
+*.o
